@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+/* 初期設定 */
+*{ margin:0; padding:0; }
+body {
+	font-family:"メイリオ","meiryo","MS Pゴシック",sans-serif;
+}
+#container {
+	margin:auto;
+	width:960px;
+	background:#ffffcc;
+}
+
+/* 画像切り替えしてるところのcss */
+#photo {
+    width: 500px;
+    height: 300px;
+    margin: 0 auto;
+    text-align: left;
+    overflow: hidden;
+    position: relative;
+}
+
+#photo img {
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+/* その他設定 */
+h1 {
+	background:#009966;
+	padding:8px;
+	color:#333399;
+	font-size:2.5em;
+	text-align:center;
+}
