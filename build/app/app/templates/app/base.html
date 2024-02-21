@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        {% load static%}
+        <script src="{% static 'app/base.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'app/base.css' %}">
+        <link rel="shortcut icon" href="{% static 'app/favicon.ico' %}" type="image/x-icon">
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <div id="club_logo">
+                <a href="{% url 'home:home' %}">
+                    <img src="{% static 'app/club_logo_min.png' %}" alt="部活動ロゴ">
+                </a>
+            </div>
+            <nav>
+                <ul id="navigation_bar">
+                    <li>
+                        <a href="{% url 'home:home' %}">ホーム</a>
+                    </li>
+                    <li>
+                        <a href="/club-introduction/" target="_blank">部活動HP</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Minto312/app">Github</a>
+                    </li>
+                    <li>
+                        <a href="https://lin.ee/HQSfqEZ" target="_blank">公式LINE</a>
+                    </li>
+                </ul>
+                <div id="tools" class="ready-hover accordion">
+                    <p>ツール</p>
+                    <ul id="tool-menu">
+                        <li><a href="{% url 'attendance:attendance' %}">出席表</a></li>
+                        <li><a href="{% url 'information:information' %}">お知らせ</a></li>
+                        <li><a href="{% url 'score:score' %}">点数表</a></li>
+                        <li><a href="#">資格試験</a></li>
+                    </ul>
+                </div>
+                <div id="user_icon" class="ready-hover accordion">
+                    <img src="/media/{{ request.user.profile.profile_image }}" alt="ユーザーアイコン">
+                    <ul id="user-menu">
+                        <li>
+                            <a href="{% url 'account:mypage' %}">マイページ</a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'account:sign_out' %}">サインアウト</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{% url 'account:sign_in' %}">サインイン</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div id="content">
+            {% block content %}
+            
+            {% endblock %}
+        </div>
+    </body>
+</html>

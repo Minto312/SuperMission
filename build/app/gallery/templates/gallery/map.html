@@ -1,0 +1,27 @@
+<!-- game.jsでimage-viewsを呼び出すためのゲームを作る -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    {% load static %}
+    <script src = "{% static 'gallery/enchant.js' %}"></script>
+	<script src="{% static 'gallery/nineleap.enchant.js' %}"></script>
+    <script src = "{% static 'gallery/index.js' %}"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body > div{
+            left: 50%;
+            translate: -50%;
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+</html>
