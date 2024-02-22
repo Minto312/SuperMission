@@ -74,84 +74,90 @@ window.onload = function(){
 [47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47],
 ]);//二次元配列
   core.rootScene.addChild(sub);
-  var kuma = new Sprite(32,32);
+  var player = new Sprite(32,32);
   i =  10;
-  kuma.image = core.assets['/static/gallery/img/chara1.png'];
-  kuma.frame = i;
-  kuma.x = 10;
-  kuma.y = 210;
-  kuma.scaleX = 1;
-  kuma.scaleY = 1;
+  player.image = core.assets['/static/gallery/img/chara1.png'];
+  player.frame = i;
+  player.x = 10;
+  player.y = 210;
+  player.scaleX = 1;
+  player.scaleY = 1;
   core.keybind(81,'q');
   core.keybind(87,'w');
-  kuma.addEventListener('enterframe',function(){
+  player.addEventListener('enterframe',function(){
     if(core.input.q){
       i = 5;
-      kuma.frame = i;
+      player.frame = i;
     }
     if(core.input.w){
       i = 0;
-      kuma.frame = i;
+      player.frame = i;
     }
     if(core.input.right){
-       kuma.rotation = 0;
-       kuma.scaleX = 1;
-       kuma.frame = core.frame % 2 + 1 + i;
+       player.rotation = 0;
+       player.scaleX = 1;
+       player.frame = core.frame % 2 + 1 + i;
        this.x += 6;
     }
     if(core.input.left){
-       kuma.rotation = 0;
-       kuma.scaleX = -1;
-       kuma.frame = core.frame % 2 + 1 + i;
+       player.rotation = 0;
+       player.scaleX = -1;
+       player.frame = core.frame % 2 + 1 + i;
        this.x -= 5;
     }
     if(core.input.up){
-       kuma.rotation = 0;
-       kuma.frame = core.frame % 2 + 1 + i;
+       player.rotation = 0;
+       player.frame = core.frame % 2 + 1 + i;
        this.y -= 5;
     }
     if(core.input.down){
-       kuma.rotation = 0;
-       kuma.frame = core.frame % 2 + 1 + i;
+       player.rotation = 0;
+       player.frame = core.frame % 2 + 1 + i;
        this.y += 5;
     }
 });//enterframe
-  var hito = new Sprite(32,32);
-  hito.image = core.assets['/static/gallery/img/chara1.png'];
-  hito.frame = 5;
-  hito.x = 285;
-  hito.y = 120;
-  hito.scaleX = 1;
-  hito.scaleY = 1;
-  core.rootScene.addChild(hito);
-  var hito2 = new Sprite(32,32);
-  hito2.image = core.assets['/static/gallery/img/chara1.png'];
-  hito2.frame = 3;
-  hito2.x = 480;
-  hito2.y = 120;
-  hito2.scaleX = 1;
-  hito2.scaleY = 1;
-  core.rootScene.addChild(hito2);
-  var hito3 = new Sprite(32,32);
-  hito3.image = core.assets['/static/gallery/img/chara1.png'];
-  hito3.frame = 1;
-  hito3.x = 368;
-  hito3.y = 330;
-  hito3.scaleX = 1;
-  hito3.scaleY = 1;
-  hito3.onenterframe = function(){
+  let people = [];
+  people.push(new Sprite(32,32));
+  people[0].image = core.assets['/static/gallery/img/chara1.png'];
+  people[0].frame = 5;
+  people[0].x = 285;
+  people[0].y = 120;
+  people[0].scaleX = 1;
+  people[0].scaleY = 1;
+  
+
+  people.push(new Sprite(32,32));
+  people[1].image = core.assets['/static/gallery/img/chara1.png'];
+  people[1].frame = 3;
+  people[1].x = 480;
+  people[1].y = 120;
+  people[1].scaleX = 1;
+  people[1].scaleY = 1;
+
+  people.push(new Sprite(32,32));
+  people[2].image = core.assets['/static/gallery/img/chara1.png'];
+  people[2].frame = 1;
+  people[2].x = 368;
+  people[2].y = 330;
+  people[2].scaleX = 1;
+  people[2].scaleY = 1;
+  people[2].onenterframe = function(){
     this.rotate(30);
     };
-  core.rootScene.addChild(hito3);
-  var hito4 = new Sprite(32,32);
-  hito4.image = core.assets['/static/gallery/img/chara1.png'];
-  hito4.frame = 8;
-  hito4.x = 685;
-  hito4.y = 360;
-  hito4.scaleX = 1;
-  hito4.scaleY = 1;
-  core.rootScene.addChild(hito4);
-  core.rootScene.addChild(kuma);
+    
+  people.push(new Sprite(32,32));
+  people[3].image = core.assets['/static/gallery/img/chara1.png'];
+  people[3].frame = 8;
+  people[3].x = 685;
+  people[3].y = 360;
+  people[3].scaleX = 1;
+  people[3].scaleY = 1;
+
+  people.forEach((p) => {
+    core.rootScene.addChild(p);
+  });
+  core.rootScene.addChild(player);
+
   var control = new Sprite(100,28);
   control.image = core.assets['/static/gallery/img/control.png'];
   control.x = 5;

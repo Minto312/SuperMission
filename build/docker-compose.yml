@@ -6,9 +6,6 @@ services:
     build:
       context: ./club_app/
       dockerfile: ./Dockerfile
-      args:
-        UID: ${UID:-1000}
-        GID: ${GID:-1000}
 
     volumes:
       - type: volume
@@ -31,10 +28,15 @@ services:
         source: db_socket
         target: /var/run/mysqld/
 
+      - type: bind
+        source: /var/www/log/
+        target: /var/www/log/
+
     environment:
       IS_PRODUCT: 'True'
       HOST: 'mel.f5.si'
       IS_DOCKER: 'True'
+      admin_password: 'adminpassword'
 
     restart: always
 
@@ -65,6 +67,12 @@ services:
         source: media
         target: /media/
 
+      - type: bind
+        source: /var/www/log/
+        target: /var/www/log/
+
+    restart: always
+
   db:
     container_name: mysql
     image: mysql:8.2.0
@@ -86,8 +94,8 @@ services:
         source: db_socket
         target: /var/run/mysqld/
 
-    depends_on:
-      - nginx
+
+    restart: always
 
 volumes:
   socket:
