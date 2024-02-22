@@ -2,9 +2,9 @@ version: '3.7'
 
 services:
   app:
-    container_name: app
+    container_name: app-graduate
     build:
-      context: ./club_app/
+      context: ./app/
       dockerfile: ./Dockerfile
 
     volumes:
@@ -45,14 +45,14 @@ services:
       - db
 
   nginx:
-    container_name: nginx
+    container_name: nginx-graduate
     build:
       context: ./nginx/
       dockerfile: ./Dockerfile
 
     ports:
-      - 80:80
-      - 443:443
+      # - 80:80
+      - 8080:443
 
     volumes:
       - type: volume
@@ -74,7 +74,7 @@ services:
     restart: always
 
   db:
-    container_name: mysql
+    container_name: mysql-graduate
     image: mysql:8.2.0
     command: --default-authentication-plugin=mysql_native_password
 
