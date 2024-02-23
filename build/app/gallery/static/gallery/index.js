@@ -124,6 +124,7 @@ window.onload = function(){
   people[0].y = 120;
   people[0].scaleX = 1;
   people[0].scaleY = 1;
+  people[0].viewer = 'school_chorusCompetition'
   
 
   people.push(new Sprite(32,32));
@@ -133,6 +134,8 @@ window.onload = function(){
   people[1].y = 120;
   people[1].scaleX = 1;
   people[1].scaleY = 1;
+  people[1].viewer = 'school_excursion'
+
 
   people.push(new Sprite(32,32));
   people[2].image = core.assets['/static/gallery/img/chara1.png'];
@@ -144,6 +147,8 @@ window.onload = function(){
   people[2].onenterframe = function(){
     this.rotate(30);
     };
+  people[2].viewer = 'school_festival'
+
     
   people.push(new Sprite(32,32));
   people[3].image = core.assets['/static/gallery/img/chara1.png'];
@@ -152,11 +157,18 @@ window.onload = function(){
   people[3].y = 360;
   people[3].scaleX = 1;
   people[3].scaleY = 1;
+  people[3].viewer = 'school_trip'
 
+
+  core.rootScene.addChild(player);
   people.forEach((p) => {
     core.rootScene.addChild(p);
+    p.addEventListener('enterframe',function(){
+      if(player.intersect(p)){
+        location.href = `/gallery/${p.viewer}`;
+      }
+    });
   });
-  core.rootScene.addChild(player);
 
   var control = new Sprite(100,28);
   control.image = core.assets['/static/gallery/img/control.png'];

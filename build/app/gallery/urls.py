@@ -6,4 +6,5 @@ app_name = GalleryConfig.name
 
 urlpatterns = [
     path('', map, name='map'),
+    path('gallery/<str:view_name>', viewer, name='viewer')
 ]

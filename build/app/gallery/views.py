@@ -4,5 +4,5 @@ from django.shortcuts import render
 def map(request):
     return render(request, 'gallery/map.html')
 
-def viewer(request):
-    return render(request, 'gallery/viewer.html')
+def viewer(request, view_name):
+    return render(request, f'gallery/{view_name}.html')
