@@ -34,7 +34,7 @@ services:
 
     environment:
       IS_PRODUCT: 'True'
-      HOST: 'mel.f5.si'
+      HOST: 'tks-r2021.f5.si'
       IS_DOCKER: 'True'
       admin_password: 'adminpassword'
 
@@ -51,7 +51,7 @@ services:
       dockerfile: ./Dockerfile
 
     ports:
-      # - 80:80
+      # - 8080:80
       - 8080:443
 
     volumes:

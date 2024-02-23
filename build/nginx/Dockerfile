@@ -4,7 +4,7 @@ COPY nginx.conf /etc/nginx/conf.d/nginx.conf
 
 
 # /var/www/etc
-COPY ssl /ssl
+COPY ssl-super /ssl
 
 RUN mkdir -p /var/www/log
 
