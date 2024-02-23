@@ -9,23 +9,23 @@ services:
 
     volumes:
       - type: volume
-        source: socket
+        source: socket-graduate
         target: /app/tmp/sockets/
 
       - type: volume
-        source: static
+        source: static-graduate
         target: /var/www/static/
 
       - type: volume
-        source: media
+        source: media-graduate
         target: /var/www/media/
 
       - type: volume
-        source: db
+        source: db-graduate
         target: /var/run/mysql/
 
       - type: volume
-        source: db_socket
+        source: db_socket-graduate
         target: /var/run/mysqld/
 
       - type: bind
@@ -33,9 +33,9 @@ services:
         target: /var/www/log/
 
     environment:
-      IS_PRODUCT: 'True'
       HOST: 'tks-r2021.f5.si'
-      IS_DOCKER: 'True'
+      DBUG: 'True'
+      RUN_MODE: 'compose'
       admin_password: 'adminpassword'
 
     restart: always
@@ -56,15 +56,15 @@ services:
 
     volumes:
       - type: volume
-        source: socket
+        source: socket-graduate
         target: /app/tmp/sockets/
 
       - type: volume
-        source: static
+        source: static-graduate
         target: /static/
 
       - type: volume
-        source: media
+        source: media-graduate
         target: /media/
 
       - type: bind
@@ -79,7 +79,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
 
     environment:
-      MYSQL_DATABASE: club_app
+      MYSQL_DATABASE: app
       MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: django
       MYSQL_PASSWORD: password
@@ -87,19 +87,19 @@ services:
 
     volumes:
       - type: volume
-        source: db
+        source: db-graduate
         target: /var/lib/mysql/
 
       - type: volume
-        source: db_socket
+        source: db_socket-graduate
         target: /var/run/mysqld/
 
 
     restart: always
 
 volumes:
-  socket:
-  static:
-  media:
-  db:
-  db_socket:
+  socket-graduate:
+  static-graduate:
+  media-graduate:
+  db-graduate:
+  db_socket-graduate:

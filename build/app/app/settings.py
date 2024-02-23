@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-mu5xs6woe@%8u%hx#9zw5=5f@zb35774kqca1)f(8)ynyxwapg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('IS_PRODUCT', 'TRUE')
+DEBUG = os.environ.get('DEBUG', 'false')
 
-ALLOWED_HOSTS = [os.environ.get('HOST','*')]
+ALLOWED_HOSTS = [os.environ.get('HOST')]
 
 # Application definition
 
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if os.environ.get('IS_DOCKER') == 'True':    
+if os.environ.get('RUN_MODE') == 'compose':    
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -139,12 +139,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-if os.environ.get('IS_DOCKER') == 'True':    
-    STATIC_ROOT = '/var/www/static/'
-    MEDIA_ROOT = '/var/www/media/'
-else:
-    STATIC_ROOT = 'static/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = '/var/www/static/'
+MEDIA_ROOT = '/var/www/media/'
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
