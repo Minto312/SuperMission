@@ -7,25 +7,6 @@ from .models import CustomUser, Profile
 # Create your views here.
 
 logger = logging.getLogger(__name__)
-class Register(View):
-    def get(self,request):
-        return render(request,'account/register.html')
-
-    def post(self,request):
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user_data = {
-            'username':username,
-            'password':password,
-        }
-
-        user = CustomUser.objects.create_user(**user_data)
-
-        login(request,user=user)
-        
-        logger.info(f'User {user.username} registered')
-        return redirect('/account/mypage')
 
 class SignIn(View):
     def get(self,request):
@@ -71,9 +52,7 @@ class MyPage(View):
 
         return_data = {
             'username':request.user.username,
-            'name' : profile.name,
             'class_id' : profile.class_id,
-            'profile_image' : profile.profile_image,
         }
         return render(request,'account/MyPage.html',return_data)
 
@@ -81,25 +60,19 @@ class MyPage(View):
         logger.info(f'User {request.user.username} updated profile')
 
         username = request.POST['username']
-        name = request.POST['name']
         class_id = request.POST['class_id']
-        profile_image = request.FILES['profile_image']
 
         # profileを選択
         profile = Profile.objects.get(user=request.user)
 
         request.user.username = username
         request.user.save()
-        profile.name = name
         profile.class_id = class_id
-        profile.profile_image = profile_image
         profile.save()
 
         return_data = {
             'username' : username,
-            'name' : profile.name,
             'class_id' : profile.class_id,
-            'profile_image' : profile.profile_image,
         }
         logger.debug(return_data)
         return render(request,'account/MyPage.html',return_data)

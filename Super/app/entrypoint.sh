@@ -1,8 +1,8 @@
 cd /app
 
 python3 manage.py makemigrations account app gallery --noinput
-python3 manage.py migrate --noinput
 python3 manage.py collectstatic --noinput
+python3 manage.py migrate --noinput
 
 # python3 manage.py custom_createsuperuser --username admin --password admin
 

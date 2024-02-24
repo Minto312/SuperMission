@@ -7,6 +7,12 @@ from .forms import CustomUserCreationForm,CustomUserChangeForm
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
 
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        ('Permissions', {'fields': ('is_staff', 'is_superuser')}),
+        # Add any additional fields here.
+    )
+    
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
 
