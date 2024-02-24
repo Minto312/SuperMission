@@ -116,6 +116,47 @@ window.onload = function(){
        this.y += 5;
     }
 });//enterframe
+
+function moveUp(target){
+  if (player.y < target){
+    return;
+  }
+  player.y -= 5;
+  setTimeout(() => {moveUp(target)}, 1000 / core.fps);
+}
+function moveDown(target){
+  if (player.y > target){
+    return;
+  }
+  player.y += 5;
+  setTimeout(() => {moveDown(target)}, 1000 / core.fps);
+}
+function moveRight(target){
+  if (player.x > target){
+    return;
+  }
+  player.x += 5;
+  setTimeout(() => {moveRight(target)}, 1000 / core.fps);
+}
+function moveLeft(target){
+  if (player.x < target){
+    return;
+  }
+  player.x -= 5;
+  setTimeout(() => {moveLeft(target)}, 1000 / core.fps);
+}
+
+core.rootScene.addEventListener('touchstart', function(e) {
+  const touchX = Math.ceil(e.x) - 16 + 390;
+  const touchY = Math.ceil(e.y) - 16;
+  console.log('player  ' + player.x + ',' + player.y)
+  console.log('touch   ' + touchX + ',' + touchY)
+  moveUp(touchY);
+  moveDown(touchY);
+  moveRight(touchX);
+  moveLeft(touchX);
+});//touchstart
+
   let people = [];
   people.push(new Sprite(32,32));
   people[0].image = core.assets['/static/gallery/img/chara1.png'];
