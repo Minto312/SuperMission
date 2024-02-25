@@ -75,9 +75,9 @@ window.onload = function(){
 ]);//二次元配列
   core.rootScene.addChild(sub);
   var player = new Sprite(32,32);
-  i =  10;
+  playerFrame =  10;
   player.image = core.assets['/static/gallery/img/chara1.png'];
-  player.frame = i;
+  player.frame = playerFrame;
   player.x = 10;
   player.y = 210;
   player.scaleX = 1;
@@ -86,67 +86,74 @@ window.onload = function(){
   core.keybind(87,'w');
   player.addEventListener('enterframe',function(){
     if(core.input.q){
-      i = 5;
-      player.frame = i;
+      playerFrame = 5;
+      player.frame = playerFrame;
     }
     if(core.input.w){
-      i = 0;
-      player.frame = i;
+      playerFrame = 0;
+      player.frame = playerFrame;
     }
     if(core.input.right){
        player.rotation = 0;
        player.scaleX = 1;
-       player.frame = core.frame % 2 + 1 + i;
+       player.frame = core.frame % 2 + 1 + playerFrame;
        this.x += 6;
     }
     if(core.input.left){
        player.rotation = 0;
        player.scaleX = -1;
-       player.frame = core.frame % 2 + 1 + i;
+       player.frame = core.frame % 2 + 1 + playerFrame;
        this.x -= 5;
     }
     if(core.input.up){
        player.rotation = 0;
-       player.frame = core.frame % 2 + 1 + i;
+       player.frame = core.frame % 2 + 1 + playerFrame;
        this.y -= 5;
     }
     if(core.input.down){
        player.rotation = 0;
-       player.frame = core.frame % 2 + 1 + i;
+       player.frame = core.frame % 2 + 1 + playerFrame;
        this.y += 5;
     }
 });//enterframe
 
-function moveUp(target){
-  if (player.y < target){
+function moveUp(to){
+  if (player.y <= to){
     return;
   }
   player.y -= 5;
-  setTimeout(() => {moveUp(target)}, 1000 / core.fps);
+  player.frame = core.frame % 2 + 1 + playerFrame;
+  setTimeout(() => {moveUp(to)}, 1000 / core.fps);
 }
-function moveDown(target){
-  if (player.y > target){
+function moveDown(to){
+  if (player.y >= to){
     return;
   }
   player.y += 5;
-  setTimeout(() => {moveDown(target)}, 1000 / core.fps);
+  player.frame = core.frame % 2 + 1 + playerFrame;
+  setTimeout(() => {moveDown(to)}, 1000 / core.fps);
 }
-function moveRight(target){
-  if (player.x > target){
+function moveRight(to){
+  if (player.x >= to){
     return;
   }
   player.x += 5;
-  setTimeout(() => {moveRight(target)}, 1000 / core.fps);
+  player.scaleX = 1;
+  player.frame = core.frame % 2 + 1 + playerFrame;
+  setTimeout(() => {moveRight(to)}, 1000 / core.fps);
 }
-function moveLeft(target){
-  if (player.x < target){
+function moveLeft(to){
+  if (player.x <= to){
     return;
   }
   player.x -= 5;
-  setTimeout(() => {moveLeft(target)}, 1000 / core.fps);
+  player.scaleX = -1;
+  player.frame = core.frame % 2 + 1 + playerFrame;
+  setTimeout(() => {moveLeft(to)}, 1000 / core.fps);
 }
 
 core.rootScene.addEventListener('touchstart', function(e) {
+  // タッチ位置の座標がズレてるから補正
   const touchX = Math.ceil(e.x) - 16 + 390;
   const touchY = Math.ceil(e.y) - 16;
   console.log('player  ' + player.x + ',' + player.y)
