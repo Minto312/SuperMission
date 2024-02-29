@@ -1,0 +1,132 @@
+@charset "utf-8";
+
+/* 初期設定 */
+*{ margin:0; padding:0; }
+body {
+	font-family:"メイリオ","meiryo","MS Pゴシック",sans-serif;
+}
+#container {
+	margin:auto;
+	width:960px;
+	background:#ffffcc;
+}
+
+/* 画像切り替えしてるところのcss */
+#photo {
+    width: 750px;
+    height: 500px;
+    margin: 0 auto;
+    text-align: left;
+    overflow: hidden;
+    position: relative;
+}
+
+#photo img {
+    top: 0;
+    left: 0;
+    position: absolute;
+	margin-top: 10px;
+}
+
+/* その他設定 */
+h1 {
+	background:#009966;
+	padding:8px;
+	color:#ffffff;
+	font-size:2.5em;
+	text-align:center;
+}
+h2 {
+	font-size:1.6em;
+	color:#ffffff;
+	padding:8px 16px;
+	margin:16px;
+	background:#00cc99;
+	border-left-style:solid;
+	border-left-width:2.0em;
+	border-left-color:#009966;
+	clear:both;
+}
+footer{
+	clear:both;
+	text-align:right;
+	border-bottom-style:ridge;
+	border-bottom-width:1px;
+	border-bottom-color:#999999;
+	padding-top:3px;
+	border-top:solid 1px #ff8c00;
+}
+p {
+	font-size:1em;
+	line-height:1.5em;
+	padding:10px 25px;
+	text-indent:1em;
+}
+em {
+	font-weight:bold;
+	font-style:normal;
+}
+
+.button018 a {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+	text-decoration: none;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 225px;
+    padding: 10px 0px 10px 25px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+.button018 a:before, .button018 a:after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 50%;
+}
+.button018 a:before {
+  width: 0.5rem;
+  height: 0.5rem;
+  left: 1.1rem;
+  border-top: solid 2px #fff;
+  border-right: solid 2px #fff;
+  z-index: 2;
+  transform: translateY(-50%) rotate(45deg);
+  transition: all 0.3s;
+}
+.button018 a:after {
+  left: 0;
+  background: #6bb6ff;
+  z-index: 1;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 4rem;
+  transform: translateY(-50%);
+  transition: all 0.5s;
+}
+.button018 a span {
+  position: relative;
+  transition: all 0.3s;
+  z-index: 3;
+}
+
+.button018 a:hover span {
+  color: #fff;
+}
+.button018 a:hover:before {
+  left: 2rem;
+}
+.button018 a:hover:after {
+  right: 0;
+  width: 100%;
+}
+背景色がhoverで線に切り替
+#main {
+	text-align: center;
+}
+.photoList {
+	text-align: center;
+}
