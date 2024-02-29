@@ -53,7 +53,6 @@ class PasswordReset(View):
         return render(request,'account/password_reset.html')
     
     def post(self,request, user_id):
-        # user_id = request.POST['user_id']
         user = CustomUser.objects.get(id=user_id)
         
         new_password = request.POST['new_password']
@@ -65,14 +64,10 @@ class PasswordReset(View):
     
 class MyPage(View):
     def get(self,request):
-        try:
-            profile = Profile.objects.get(user=request.user)
-        except:
-            profile = Profile.objects.create(user=request.user,name='',class_id='')
 
         return_data = {
             'username':request.user.username,
-            'class_id' : profile.class_id,
+            'email' : request.user.email,
         }
         return render(request,'account/MyPage.html',return_data)
 
@@ -80,19 +75,18 @@ class MyPage(View):
         logger.info(f'User {request.user.username} updated profile')
 
         username = request.POST['username']
-        class_id = request.POST['class_id']
+        new_password = request.POST['password']
+        email = request.POST['email']
 
-        # profileを選択
-        profile = Profile.objects.get(user=request.user)
 
         request.user.username = username
+        request.user.set_password(new_password)
+        request.user.email = email
         request.user.save()
-        profile.class_id = class_id
-        profile.save()
 
         return_data = {
             'username' : username,
-            'class_id' : profile.class_id,
+            'email' : request.user.email,
         }
         logger.debug(return_data)
         return render(request,'account/MyPage.html',return_data)
