@@ -8,7 +8,7 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
 
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
+        (None, {'fields': ('username', 'password', 'email')}),
         ('Permissions', {'fields': ('is_staff', 'is_superuser')}),
         # Add any additional fields here.
     )

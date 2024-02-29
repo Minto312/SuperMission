@@ -4,6 +4,12 @@
     {% load static %}
     <title>サインイン</title>
     <link rel="stylesheet" href="{% static 'account/sign_in.css' %}">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function(){
+           emailjs.init("23x6OTgT-STNp4_u1");
+        })();
+     </script>
     <script src="{% static 'account/sign_in.js' %}"></script>
 {% endblock %}
 
@@ -26,9 +32,30 @@
                     <input type="password" name="password" id="password" class="input-text" placeholder="password">
                 </div>
                 <!-- <div id="submit-box"> -->
-                    <input id="submit" name="sub" type="submit" value="サインイン">
+                    <input id="submit" class="submit-button" name="sub" type="submit" value="サインイン">
                 <!-- </div> -->
             </form>
+            <button type="button" id="forgot-password">パスワードを忘れた場合</button>
+        </div>
+    </div>
+    <div id="email-back">
+
+        <div id="email-container">
+            <div>
+                <h2>パスワードをリセット</h2>
+                <button type="button" id="cancel">X</button>
+            </div>
+            <div id="form-container">
+                <form>
+                    <div class="form-box">
+                        <label for="email">メールアドレス</label>
+                        <input type="text" name="email" id="email" class="input-text" placeholder="E-mail">
+                    </div>
+                    <!-- <div id="submit-box"> -->
+                        <button id="emailSubmit" class="submit-button" type="button">送信</button>
+                        <!-- </div> -->
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

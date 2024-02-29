@@ -52,6 +52,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             'unique': ("既に存在するユーザー名です"),
         },
     )
+    
+    email = models.EmailField(
+        ('email address'),
+        blank=True,
+        help_text='メールアドレスを入力してください。',
+        error_messages={
+            'unique': ("既に存在するメールアドレスです"),
+        },
+    )
 
     is_staff = models.BooleanField(
         ('staff status'),
@@ -92,4 +101,3 @@ class Profile(models.Model):
     )
 
     class_id = models.CharField(max_length=4, blank=True)
-    email = models.EmailField(blank=True)

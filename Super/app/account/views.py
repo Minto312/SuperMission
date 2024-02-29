@@ -4,6 +4,7 @@ from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from .models import CustomUser, Profile
+from django.http import JsonResponse
 # Create your views here.
 
 logger = logging.getLogger(__name__)
@@ -37,12 +38,31 @@ class SignIn(View):
             return render(request,'account/sign_in.html',return_data)
     
 
-class SignOut(View):
-    def get(self,request):
-        logout(request)
-        logger.info(f'User {request.user.username} signed out')
-        return redirect('/account/sign_in')
 
+class QueryEmail(View):
+    def get(self,request, email):
+        try:
+            user = CustomUser.objects.get(email=email)
+            return JsonResponse({'user_id': user.id, 'username': user.username})
+        except:
+            return JsonResponse({'user_id': 'notFound', 'username': 'notFound'})
+        
+
+class PasswordReset(View):
+    def get(self,request, user_id):
+        return render(request,'account/password_reset.html')
+    
+    def post(self,request, user_id):
+        # user_id = request.POST['user_id']
+        user = CustomUser.objects.get(id=user_id)
+        
+        new_password = request.POST['new_password']
+        user.set_password(new_password)
+        user.save()
+        
+        logger.info(f'User {user.username} reset password')
+        return redirect('/account/sign_in')
+    
 class MyPage(View):
     def get(self,request):
         try:
@@ -76,3 +96,9 @@ class MyPage(View):
         }
         logger.debug(return_data)
         return render(request,'account/MyPage.html',return_data)
+    
+class SignOut(View):
+    def get(self,request):
+        logout(request)
+        logger.info(f'User {request.user.username} signed out')
+        return redirect('/account/sign_in')
