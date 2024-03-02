@@ -4,37 +4,37 @@ services:
   app:
     container_name: app-graduate
     build:
-      context: ./app/
-      dockerfile: ./Dockerfile
+      context: .
+      dockerfile: ./app/Dockerfile
 
     volumes:
-      - type: volume
-        source: socket
+      - type: bind
+        source: ./app/
+        target: /app/
+        
+      - type: bind
+        source: ./app/tmp/sockets/
         target: /app/tmp/sockets/
 
-      - type: volume
-        source: static
+      - type: bind
+        source: ./static/
         target: /var/www/static/
 
-      - type: volume
-        source: media
-        target: /var/www/media/
-
-      - type: volume
-        source: db
+      - type: bind
+        source: ./mysql/data/
         target: /var/run/mysql/
 
-      - type: volume
-        source: db_socket
+      - type: bind
+        source: ./mysql/sockets/
         target: /var/run/mysqld/
 
       - type: bind
-        source: /var/www/log/
+        source: ./log/
         target: /var/www/log/
 
     environment:
       HOST: 'tks-r2021.f5.si'
-      DBUG: 'True'
+      DBUG: 'False'
       RUN_MODE: 'compose'
       admin_password: 'adminpassword'
 
@@ -47,28 +47,24 @@ services:
   nginx:
     container_name: nginx-graduate
     build:
-      context: ./nginx/
-      dockerfile: ./Dockerfile
+      context: .
+      dockerfile: ./nginx/Dockerfile
 
     ports:
       # - 8080:80
       - 8080:443
 
     volumes:
-      - type: volume
-        source: socket
+      - type: bind
+        source: ./app/tmp/sockets/
         target: /app/tmp/sockets/
 
-      - type: volume
-        source: static
+      - type: bind
+        source: ./static/
         target: /static/
 
-      - type: volume
-        source: media
-        target: /media/
-
       - type: bind
-        source: /var/www/log/
+        source: ./log/
         target: /var/www/log/
 
     restart: always
@@ -86,20 +82,13 @@ services:
       TZ: Asia/Tokyo
 
     volumes:
-      - type: volume
-        source: db
+      - type: bind
+        source: ./mysql/data/
         target: /var/lib/mysql/
 
-      - type: volume
-        source: db_socket
+      - type: bind
+        source: ./mysql/sockets/
         target: /var/run/mysqld/
 
 
     restart: always
-
-volumes:
-  socket:
-  static:
-  media:
-  db:
-  db_socket:
