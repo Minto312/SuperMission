@@ -5,3 +5,18 @@ migrations/
 */static/gallery/img/*
 
 ssl-super/
+
+
+/app/tmp/sockets/*
+!app/tmp/sockets/.gitkeep
+
+/log/*
+!log/.gitkeep
+
+/mysql/data/*
+/mysql/sockets/*
+!mysql/data/.gitkeep
+!mysql/sockets/.gitkeep
+
+/static/*
+!/static/.gitkeep
