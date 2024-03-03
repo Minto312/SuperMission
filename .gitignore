@@ -7,16 +7,16 @@ migrations/
 ssl-super/
 
 
-/app/tmp/sockets/*
-!app/tmp/sockets/.gitkeep
+/Super/app/tmp/sockets/*
+!/Super/app/tmp/sockets/.gitkeep
 
-/log/*
-!log/.gitkeep
+/Super/log/*
+!/Super/log/.gitkeep
 
-/mysql/data/*
-/mysql/sockets/*
-!mysql/data/.gitkeep
-!mysql/sockets/.gitkeep
+/Super/mysql/data/*
+/Super/mysql/sockets/*
+!/Super/mysql/data/.gitkeep
+!/Super/mysql/sockets/.gitkeep
 
-/static/*
-!/static/.gitkeep
+/Super/static/*
+!/Super/static/.gitkeep
