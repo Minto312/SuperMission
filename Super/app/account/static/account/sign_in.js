@@ -40,10 +40,12 @@ const sendEmail = async function(){
         templateVariables,
     ).then(
         (response) => {
-          console.log('SUCCESS!', response.status, response.text);
+            document.getElementById('success-message').style.display = 'block';
+            console.log('SUCCESS!', response.status, response.text);
         },
         (error) => {
-          console.log('FAILED...', error);
+            document.getElementById('error-message').style.display = 'block';
+            console.log('FAILED...', error);
         },
     )
 }

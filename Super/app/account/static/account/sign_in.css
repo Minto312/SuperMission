@@ -117,6 +117,27 @@ div:has(> #cancel){
     font-size: 2em;
 }
 
+#success-message {
+    display: none;
+    font-size: 1.5em;
+    width: fit-content;
+    margin: auto;
+    padding: 0.5em 1em;
+    color: #000000;
+    z-index: 2;
+    background-color: #b3f5ab;
+}
+#error-message {
+    display: none;
+    font-size: 1.5em;
+    width: fit-content;
+    margin: auto;
+    padding: 0.5em 1em;
+    color: #000000;
+    z-index: 2;
+    background-color: #f5abb3;
+}
+
 #contact {
     width: 100%;
     text-align: right;
