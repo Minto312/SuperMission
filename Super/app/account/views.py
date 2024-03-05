@@ -85,11 +85,11 @@ class MyPage(View):
         request.user.save()
 
         return_data = {
-            'username' : username,
+            'username' : request.user.username,
             'email' : request.user.email,
         }
         logger.debug(return_data)
-        return render(request,'account/MyPage.html',return_data)
+        return redirect('/')
     
 class SignOut(View):
     def get(self,request):
