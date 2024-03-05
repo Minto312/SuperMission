@@ -116,3 +116,9 @@ div:has(> #cancel){
     right: 8px;
     font-size: 2em;
 }
+
+#contact {
+    width: 100%;
+    text-align: right;
+    margin: 0.3em 0.2em;
+}
