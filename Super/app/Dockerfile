@@ -9,7 +9,7 @@ RUN apt-get update && apt-get upgrade -y && \
                        libpcre3 libpcre3-dev \
                        pkg-config default-libmysqlclient-dev
 
-
+COPY ./app/requirements.txt requirements.txt
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
