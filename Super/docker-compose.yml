@@ -34,7 +34,7 @@ services:
 
     environment:
       HOST: 'tks-r2021.f5.si'
-      DBUG: 'False'
+      DEBUG: 'False'
       RUN_MODE: 'compose'
       admin_password: 'adminpassword'
 
